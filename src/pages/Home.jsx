@@ -16,7 +16,7 @@ const HERO_CONTENT = [
     subtitle: 'Dites-nous simplement quel animal vous avez et où vous vivez, et notre IA vous proposera un programme quotidien précis d’alimentation et d’eau, basé sur la science agricole et conçu pour réduire les coûts.',
     btnPrimary: 'Lancer l’assistant IA',
     btnSecondary: 'Voir un exemple de rapport',
-    btnVoiceChat: 'Assistant vocal'
+    btnVoiceChat: 'Assistant texte'
   },
   {
     id: 'en',
@@ -26,7 +26,7 @@ const HERO_CONTENT = [
     subtitle: 'Just tell us what animals you have and where you live, and our AI will give you an exact, cost-saving daily feeding and watering schedule based on expert agricultural science.',
     btnPrimary: 'Launch AI Assistant',
     btnSecondary: 'View Example Report',
-    btnVoiceChat: 'Voice Assistant'
+    btnVoiceChat: 'Text Assistant'
   },
   {
     id: 'ar',
@@ -36,7 +36,7 @@ const HERO_CONTENT = [
     subtitle: 'قل لينا شنو عندك ديال البهائم، والذكاء الاصطناعي غادي يعطيك خطة يومية دقيقة وموفرة للفلوس ديال العلف والماء مبنية على علم الفلاحة.',
     btnPrimary: 'ابدأ المساعد الذكي',
     btnSecondary: 'شوف مثال تقرير',
-    btnVoiceChat: 'المساعد الصوتي'
+    btnVoiceChat: 'المساعد النصي'
   },
   {
     id: 'tz',
@@ -46,7 +46,7 @@ const HERO_CONTENT = [
     subtitle: 'ⵉⵏⵉ ⴰⵏⵖ ⵎⴰⵏ ⵉⵎⵓⴷⴰⵔ ⵖⵓⵔⴽ, ⴰⵎⵙⵉⵡⵙ ⵏⵏⵖ ⴰⴷ ⴰⴽ ⵢⴼⴽ ⴰⵖⴰⵡⴰⵙ ⵏ ⵓⵙⵙⵛⵜⴰ ⵉⵙⵏⵉⴷⵏ ⵅⴼ ⵜⵓⵙⵙⵏⴰ ⵏ ⵜⴼⵍⵍⴰⵃⵜ.',
     btnPrimary: 'ⵙⴽⵔ ⴰⵎⵙⵉⵡⵙ',
     btnSecondary: 'ⵥⵕ ⴰⵎⴷⵢⴰ',
-    btnVoiceChat: 'ⴰⵎⵙⵉⵡⵙ ⴰⵎⵙⵍⵉ'
+    btnVoiceChat: 'ⴰⵎⵙⵉⵡⵙ ⵏ ⵓⵔⴰⵔ'
   }
 ];
 
@@ -152,7 +152,7 @@ export default function Home() {
           <div className="flex items-center gap-10 bg-white/20 backdrop-blur-xl px-8 py-3 rounded-full border border-white/30 shadow-2xl">
             <a href="#" onClick={() => setView('home')} className="text-slate-900 font-bold text-sm tracking-widest uppercase hover:text-agricultural-green transition-all hover:scale-110">Home</a>
             <a href="#" onClick={() => setView('assistant')} className="text-slate-900 font-bold text-sm tracking-widest uppercase hover:text-agricultural-green transition-all hover:scale-110">Feed by AI</a>
-            <a href="#" onClick={() => setView('voicechat')} className="text-slate-900 font-bold text-sm tracking-widest uppercase hover:text-agricultural-green transition-all hover:scale-110">Voice Chat</a>
+            <a href="#" onClick={() => setView('voicechat')} className="text-slate-900 font-bold text-sm tracking-widest uppercase hover:text-agricultural-green transition-all hover:scale-110">Text Chat</a>
             <a href="#" onClick={handleViewExample} className="text-slate-900 font-bold text-sm tracking-widest uppercase hover:text-agricultural-green transition-all hover:scale-110">Example</a>
           </div>
         </nav>
@@ -223,7 +223,6 @@ export default function Home() {
               else setLanguage('en');
               setView('voicechat');
             }} className="group text-lg bg-teal-600 hover:bg-teal-700 shadow-teal-500/25 hover:shadow-teal-500/40 shadow-2xl px-8 border border-white/20 w-full sm:w-auto transition-all duration-300 transform hover:-translate-y-0.5 text-white">
-              <span className={`transition-transform ${HERO_CONTENT[currentLangIndex].dir === 'rtl' ? 'ml-2 group-hover:rotate-12' : 'mr-2 group-hover:rotate-12'}`}>🎙️</span>
               {HERO_CONTENT[currentLangIndex].btnVoiceChat}
             </Button>
             <Button variant="outline" size="lg" onClick={handleViewExample} className="text-lg px-8 bg-white/95 backdrop-blur-md border-2 border-slate-300 hover:border-agricultural-green hover:bg-white shadow-xl w-full sm:w-auto transition-all duration-300 transform hover:-translate-y-0.5">

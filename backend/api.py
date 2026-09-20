@@ -210,27 +210,35 @@ async def voice_chat(audio: UploadFile = File(...), language: str = Form("en")):
         
     audio_bytes = await audio.read()
     
-    # 1. ASR: Speech-to-Text using atlasia/molsot or whisper fallback
-    headers = {"Authorization": f"Bearer {hf_token}"}
-    asr_model = "atlasia/molsot"
-    asr_url = f"https://api-inference.huggingface.co/models/{asr_model}"
-    
+    # 1. ASR: use the Darija model for Arabic dialects and Whisper otherwise.
+    headers = {
+        "Authorization": f"Bearer {hf_token}",
+        "Content-Type": audio.content_type or "audio/webm",
+    }
+    asr_models = (
+        ["atlasia/molsot", "openai/whisper-large-v3"]
+        if language in ["darija", "ar"]
+        else ["openai/whisper-large-v3", "atlasia/molsot"]
+    )
+
     try:
-        response = requests.post(asr_url, headers=headers, data=audio_bytes)
-        if response.status_code != 200:
-            # Fallback to Whisper if Atlasia is unloading or unavailable
-            asr_model = "openai/whisper-large-v3"
+        transcribed_text = ""
+        last_error = ""
+        for asr_model in asr_models:
             asr_url = f"https://api-inference.huggingface.co/models/{asr_model}"
-            response = requests.post(asr_url, headers=headers, data=audio_bytes)
-            
-        response.raise_for_status()
-        asr_result = response.json()
-        transcribed_text = asr_result.get("text", "")
+            response = requests.post(asr_url, headers=headers, data=audio_bytes, timeout=60)
+            if response.status_code == 200:
+                asr_result = response.json()
+                transcribed_text = asr_result.get("text", "").strip()
+                if transcribed_text:
+                    break
+            last_error = f"{asr_model}: {response.text[:300]}"
+
         if not transcribed_text:
-            raise ValueError("Empty transcription")
+            raise ValueError(f"Empty transcription ({last_error})")
     except Exception as e:
         print(f"ASR Error: {e}")
-        transcribed_text = "I couldn't hear you clearly, can you repeat?" # Fallback
+        raise HTTPException(status_code=502, detail="Speech recognition failed. Please speak closer to the microphone and try again.") from e
         
     # 2. RAG: Process text through Chatbot
     docs = retriever.invoke(transcribed_text)
