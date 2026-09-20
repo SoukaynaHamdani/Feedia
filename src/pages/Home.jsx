@@ -179,9 +179,9 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-agricultural-green opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-agricultural-green"></span>
               </span>
-              {currentLangIndex === 0 && "Morocco's AI Livestock Hub"}
-              {currentLangIndex === 1 && "محرك التغذية الذكي للمغرب"}
-              {currentLangIndex === 2 && "ⴰⵙⵎⴳⴰⵍ ⵏ ⵓⵙⵙⵛⵜⴰ ⵉ ⵍⵎⵖⵔⵉⴱ"}
+              {currentLangIndex === 0 && "AI Livestock Hub"}
+              {currentLangIndex === 1 && "Smart Feeding Engine"}
+              {currentLangIndex === 2 && "ⴰⵙⵎⴳⴰⵍ ⵏ ⵓⵙⵙⵛⵜⴰ ⵉ ⵓⵙⵎⴳⴰⵍ"}
             </div>
           </div>
 

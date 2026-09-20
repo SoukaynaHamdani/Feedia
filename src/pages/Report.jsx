@@ -6,6 +6,7 @@ import useAppStore from '../store/useAppStore';
 import { Button } from '../components/ui/Button';
 import { speakText, stopSpeaking } from '../services/aiService';
 import { translations } from '../utils/translations';
+import { FormattedText } from '../utils/markdown';
 
 const COLORS = ['#059669', '#d97706', '#0284c7', '#ea580c', '#65a30d']; // Forest Green, Amber, Sky Blue, Rust Orange, Leaf Green
 
@@ -146,7 +147,7 @@ export default function Report() {
               {isRtl ? `${t.nutritionReport} ${overview.animal}` : `${overview.animal} ${t.nutritionReport}`}
             </h1>
             <p className="text-lg text-emerald-50 leading-relaxed font-medium">
-              {overview.summary}
+              <FormattedText>{overview.summary}</FormattedText>
             </p>
           </div>
           <div className="bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl inline-flex flex-col items-center border border-white/20 shadow-inner">
@@ -252,7 +253,7 @@ export default function Report() {
                   <div className="absolute -start-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-agricultural-sunset shadow-sm group-hover:scale-110 transition-transform"></div>
                   <div className="font-extrabold text-slate-900 text-lg mb-2">{item.time}</div>
                   <div className="text-slate-600 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm shadow-slate-200/50 group-hover:border-agricultural-sunset/30 transition-colors">
-                    {item.action}
+                    <FormattedText>{item.action}</FormattedText>
                   </div>
                 </motion.div>
               ))}
@@ -266,7 +267,7 @@ export default function Report() {
               className="bg-white rounded-2xl p-6 shadow-sm shadow-slate-200/50 border border-slate-100 border-s-4 border-s-emerald-500"
             >
               <h4 className="font-bold text-slate-800 mb-3 text-lg">{t.costSavings}</h4>
-              <p className="text-sm text-slate-600 leading-relaxed font-medium">{recommendations.costSaving}</p>
+              <p className="text-sm text-slate-600 leading-relaxed font-medium"><FormattedText>{recommendations.costSaving}</FormattedText></p>
             </motion.div>
             
             <motion.div 
@@ -276,7 +277,7 @@ export default function Report() {
               <h4 className="font-bold text-slate-800 mb-3 text-lg flex items-center gap-2">
                  {t.productivity}
               </h4>
-              <p className="text-sm text-slate-600 leading-relaxed font-medium">{recommendations.productivity}</p>
+              <p className="text-sm text-slate-600 leading-relaxed font-medium"><FormattedText>{recommendations.productivity}</FormattedText></p>
             </motion.div>
 
             <motion.div 
@@ -284,7 +285,7 @@ export default function Report() {
               className="bg-white rounded-2xl p-6 shadow-sm shadow-slate-200/50 border border-slate-100 border-s-4 border-s-blue-500"
             >
               <h4 className="font-bold text-slate-800 mb-3 text-lg">{t.localAlternatives}</h4>
-              <p className="text-sm text-slate-600 leading-relaxed font-medium">{recommendations.localFood}</p>
+              <p className="text-sm text-slate-600 leading-relaxed font-medium"><FormattedText>{recommendations.localFood}</FormattedText></p>
             </motion.div>
 
             <motion.div 
@@ -294,7 +295,7 @@ export default function Report() {
               <h4 className="font-bold text-slate-800 mb-3 text-lg flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-red-500" /> {t.healthWarnings}
               </h4>
-              <p className="text-sm text-slate-600 leading-relaxed font-medium">{recommendations.healthWarnings}</p>
+              <p className="text-sm text-slate-600 leading-relaxed font-medium"><FormattedText>{recommendations.healthWarnings}</FormattedText></p>
             </motion.div>
           </div>
           

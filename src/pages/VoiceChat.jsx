@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mic, Square, ArrowLeft, Loader2, Volume2, Send } from 'lucide-react';
 import useAppStore from '../store/useAppStore';
 import { speakText, stopSpeaking } from '../services/aiService';
+import { FormattedText } from '../utils/markdown';
 
 export default function VoiceChat() {
   const { setView, language } = useAppStore();
@@ -232,7 +233,7 @@ export default function VoiceChat() {
                 </div>
               )}
               <p className={`text-sm md:text-base ${msg.sender === 'user' ? 'text-white/90' : 'text-slate-700'} leading-relaxed`}>
-                {msg.text}
+                <FormattedText>{msg.text}</FormattedText>
               </p>
             </div>
           </motion.div>

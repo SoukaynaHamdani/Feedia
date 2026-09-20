@@ -1,3 +1,5 @@
+import { stripMarkdown } from '../utils/markdown';
+
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
 let currentAudio = null; // Global reference for HTML5 Audio
@@ -154,6 +156,7 @@ const speakWithCloudTTS = async (text, language) => {
 export const speakText = async (text, language = 'fr') => {
   // Always stop previous audio
   stopSpeaking();
+  text = stripMarkdown(text);
 
   if (language === 'darija' || language === 'tamazight') {
     return speakWithCloudTTS(text, language);
