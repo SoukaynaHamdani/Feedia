@@ -1,12 +1,16 @@
 import { stripMarkdown } from '../utils/markdown';
 
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+ 
 
+// AJOUTE CETTE LIGNE :
+const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+ 
 let currentAudio = null; // Global reference for HTML5 Audio
 
 export const generateReportFromGroq = async (animalType, animalBreed, herdSize, age, location, season, budget, language = 'en') => {
   try {
-    const response = await fetch("/api/generate-report", {
+    const response = await fetch(`${API_BASE_URL}/api/generate-report`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

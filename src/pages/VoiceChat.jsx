@@ -4,6 +4,8 @@ import { ArrowLeft, Loader2, Volume2, Send } from 'lucide-react';
 import useAppStore from '../store/useAppStore';
 import { speakText, stopSpeaking } from '../services/aiService';
 import { FormattedText } from '../utils/markdown';
+// ADD THIS LINE HERE:
+const API_BASE_URL = import.meta.env.VITE_API_URL || "";
 
 export default function VoiceChat() {
   const { setView, language } = useAppStore();
@@ -46,7 +48,7 @@ export default function VoiceChat() {
     setIsProcessing(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: userText, language: language || 'fr' })
